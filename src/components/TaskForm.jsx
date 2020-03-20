@@ -1,20 +1,52 @@
 import React from 'react'
+import { addTask } from '../redux/actions'
+import { connect } from 'react-redux'
 
-export class TaskForm extends React.Component {
+class TaskForm extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            tasks: ''
+            text: ''
         }
+    }
+
+    addSubmitHandler = event => {
+        event.preventDefault()
+
+        const {text} = this.state
+
+        if(!text.trim()) return
+
+        const newTask = {
+            id: Date.now(),
+            text,
+            isCompleted: false
+        }
+
+        this.props.addTask(newTask)
+        this.setState({ text: "" })
+    }
+
+    onChangeHandler = event => {
+        event.persist()
+        this.setState(prev => ({...prev, ...{
+            [event.target.name]: event.target.value 
+        }}))
     }
 
     render() {
         return (
-            <div class="form-group w-75">
-                <input type="text" class="form-control" id="title" name="task" placeholder="Введите текст новой задачи"/>
+            <form className="form-group w-75" onSubmit={this.addSubmitHandler}>
+                <input onChange={this.onChangeHandler} type="text" className="form-control" id="title" name="text" value={this.state.text} placeholder="Введите текст новой задачи"/>
                 <button type="submit" className="btn btn-primary mt-3">Добавить</button>
-            </div>
+            </form>
         )
     }
 }
+
+const mapDispatchToProps = {
+    addTask
+}
+
+export default connect(null, mapDispatchToProps)(TaskForm)

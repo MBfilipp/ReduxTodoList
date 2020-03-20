@@ -1,5 +1,5 @@
 import React from 'react'
-import { TaskForm } from './components/TaskForm'
+import TaskForm from './components/TaskForm'
 import Tasks from './components/Tasks'
 import "./style/style.css"
 
@@ -13,7 +13,7 @@ function App() {
             </div>
             <div className="col-11 mb-5 h-50 mx-auto">
               <h3 className="text-center mt-3 mb-5">Список задач</h3>
-              <Tasks tasks={[]} />
+              <Tasks />
             </div>
         </div>
     </div>
