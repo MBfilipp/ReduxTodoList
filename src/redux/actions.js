@@ -1,4 +1,4 @@
-import { ADD_TASK, DELETE_TASK, COMPLETE_TASK, UNCOMPLETE_TASK } from "./types"
+import { ADD_TASK, DELETE_TASK, TOGGLE_COMPLETE_TASK } from "./types"
 
 export const addTask = (task) => {
     return {
@@ -14,16 +14,9 @@ export const deleteTask = (id) => {
     }
 }
 
-export const completeTask = (id) => {
+export const toggleCompleteTask = (id) => {
     return { 
-        type: COMPLETE_TASK,
-        payload: id
-    }
-}
-
-export const uncompleteTask = (id) => {
-    return { 
-        type: UNCOMPLETE_TASK,
+        type: TOGGLE_COMPLETE_TASK,
         payload: id
     }
 }
